@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "kaupakaupa": {
+      "type": "http",
+      "url": "https://mcp.kaupakaupa.is/mcp"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "kaupakaupa-mcp",
+  "owner": { "name": "KaupaKaupa" },
+  "description": "KaupaKaupa product search for AI assistants",
+  "plugins": [
+    {
+      "name": "kaupakaupa",
+      "source": "./",
+      "description": "KaupaKaupa product search MCP server and shopping skill"
+    }
+  ]
+}
