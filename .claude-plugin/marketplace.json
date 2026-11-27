@@ -1,6 +1,6 @@
 {
   "name": "kaupakaupa-mcp",
-  "owner": { "name": "KaupaKaupa" },
+  "owner": { "name": "KaupaKaupa ehf." },
   "description": "KaupaKaupa product search for AI assistants",
   "plugins": [
     {
