@@ -60,7 +60,6 @@ Put what you understood into the fields. Keep `query` to the few words that are 
 - `sort` is `relevance` (default), `price_asc`, `price_desc`, `discount` or `popularity`.
 - Refine with ids the server gave you: `attributes` and `shops` from a search answer, `category_codes` from `browse_categories` or from a product's `category_code`. Do not guess ids.
 - A search reaches at most 100 products (5 pages of 20). Add filters instead of paging further.
-- Do not trust the order of a price-sorted page yet: results sorted with `price_asc` or `price_desc` can come back out of order. Sort the page yourself by price, and read page 2 before you call anything the cheapest.
 - A price-sorted search can start with rental or placeholder prices of a few ISK. Set `price_min` to a sensible floor for any price sort.
 - Read `result_categories` in every answer. It lists the categories of the products on the page with counts, so you can see at once when a search for a phone returned mostly phone cases.
 

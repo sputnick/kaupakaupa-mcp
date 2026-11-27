@@ -2,6 +2,10 @@
 
 Changes to the server's tools and to this guide, newest first.
 
+## 2026-11-27 (evening)
+
+- Server: searches sorted by price (`price_asc`, `price_desc`) or by `discount` now come back in that order on every page. The skill no longer asks you to re-sort a price-sorted page yourself.
+
 ## 2026-11-27
 
 - First version of this repository: setup guide per client, the `kaupakaupa-shopping` skill and its recipes.
