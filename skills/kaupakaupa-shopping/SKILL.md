@@ -60,6 +60,8 @@ Put what you understood into the fields. Keep `query` to the few words that are 
 - `sort` is `relevance` (default), `price_asc`, `price_desc`, `discount` or `popularity`.
 - Refine with ids the server gave you: `attributes` and `shops` from a search answer, `category_codes` from `browse_categories` or from a product's `category_code`. Do not guess ids.
 - A search reaches at most 100 products (5 pages of 20). Add filters instead of paging further.
+- Do not trust the order of a price-sorted page yet: results sorted with `price_asc` or `price_desc` can come back out of order. Sort the page yourself by price, and read page 2 before you call anything the cheapest.
+- A price-sorted search can start with rental or placeholder prices of a few ISK. Set `price_min` to a sensible floor for any price sort.
 - Read `result_categories` in every answer. It lists the categories of the products on the page with counts, so you can see at once when a search for a phone returned mostly phone cases.
 
 ## 5. When the data is imperfect
@@ -77,7 +79,7 @@ The catalogue is crawled and classified automatically. These four cases come up 
 3. Call `get_products` with those ids to get delivery facts and price freshness for all of them in one call.
 4. Say that you matched them by name yourself, so the user knows to check the variant at the shop.
 
-**A 30-day low far below the current price.** `lowest_30d` much lower than the price can be a sale that ended or bad data. Call `get_price_history` before you call anything a deal. Its `points` are the price a shopper paid at each change, and each point holds from its time until the next. Its `sale_spans` list the periods when the shop's list price was above the price charged: `from`, `to` (absent while the sale is still on), `list_price` and `sale_price`.
+**A 30-day low far below the current price.** `lowest_30d` much lower than the price can be a sale that ended or bad data. Call `get_price_history` before you call anything a deal. Its `points` are the price a shopper paid at each change, and each point holds from its time until the next. Its `sale_spans` list the periods when the shop's list price was above the price charged: `from`, `to` (absent while the sale is still on), `list_price` and `sale_price`. `sale_spans` is left out when the shop publishes no list price, which is common, so a missing `sale_spans` does not mean there was no price drop: read the `points`. For the same reason `discount_price` is often absent on a product whose price did drop, and `lowest_30d` can lag a price change by a day.
 
 Two smaller ones: `brand` is the shop's own value and can be missing or hold the shop's name, so when the `brands` filter returns little, put the brand in `query`. And `image_url` is the shop's own file, which may refuse to load or be in a format your client cannot show; do not promise a picture.
 
@@ -87,7 +89,7 @@ Search results do not carry delivery cost. Before you name a cheapest total:
 
 1. Get the candidates with `get_offers`, or the fallback in section 5.
 2. Read `delivery` on each: `home_delivery_from` is the lowest home-delivery price (a floor, not a quote), `free_over` is the order value above which delivery is free, `pickup_available` true means pickup is known to exist (false means unknown, not "no"), and `is_estimate` true means a typical figure, not the shop's own.
-3. Total = price (or `discount_price` when present) plus `home_delivery_from`, or just the price when it is at or above `free_over`.
+3. Total = price (or `discount_price` when present) plus `home_delivery_from`, or just the price when it is at or above `free_over`. When a product has no `free_over`, call `get_shop` with the shop's `domain` and use its `free_shipping_over`.
 4. Present a small table: shop, price, delivery, total, when the price was checked. Mark estimates and stale prices.
 
 ## 7. More recipes
