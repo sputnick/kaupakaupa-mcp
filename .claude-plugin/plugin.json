@@ -2,5 +2,6 @@
   "name": "kaupakaupa",
   "description": "Search Icelandic online shops through KaupaKaupa: connects the KaupaKaupa MCP server and adds a shopping skill.",
   "homepage": "https://kaupakaupa.is",
-  "repository": "https://github.com/sputnick/kaupakaupa-mcp"
+  "repository": "https://github.com/sputnick/kaupakaupa-mcp",
+  "privacyPolicyUrl": "https://kaupakaupa.is/privacy/en/"
 }

@@ -98,3 +98,7 @@ The catalogue is built by crawling shops and classifying their products automati
 ## Feedback
 
 Found a wrong price, a missed match or a tool that misbehaves? Open an issue in this repository and include the tool call and what you expected.
+
+## Privacy
+
+KaupaKaupa privacy policy: https://kaupakaupa.is/privacy/en/
