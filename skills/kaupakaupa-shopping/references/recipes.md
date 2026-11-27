@@ -44,9 +44,10 @@ Example request: "Is this Black Friday price actually a discount?"
    {"product_id": "<id>", "range": "90d"}
    ```
 
-3. Read the points oldest first. Each point holds until the next one. A real sale shows a higher price holding for weeks before the drop. A price that rose shortly before the "sale" is a warning sign. Say what you see.
-4. If the answer's state is `too_new`, there are fewer than 14 days of history: say there is not enough history to judge. If it is `unavailable`, there is no history to show.
-5. `get_offers` (or the name-search fallback) to see whether another shop is cheaper anyway.
+3. Read `points` oldest first. Each point holds until the next one. A real sale shows a higher price holding for weeks before the drop. A price that rose shortly before the "sale" is a warning sign. Say what you see.
+4. Read `sale_spans`. A span with no `to` is a sale still on. A span whose `to` is in the past is a sale that ended, so a low `lowest_30d` from it is not today's price. A span's `from` is the start of the range you asked for when the sale began before it; ask for `all` to see the real start. `lowest` and `highest` give the extremes of the range with their dates.
+5. If the answer's `state` is `too_new`, there are fewer than 14 days of history: say there is not enough history to judge. If it is `unavailable`, there is no history to show.
+6. `get_offers` (or the name-search fallback) to see whether another shop is cheaper anyway.
 
 ## Splitting a shopping list across shops
 

@@ -70,14 +70,14 @@ The catalogue is crawled and classified automatically. These four cases come up 
 
 **A category filter hides real results.** Categories are sometimes wrong: a phone can sit under computer parts. When a category filter returns few results, or misses a shop you expected, run the same search again without `category_codes` and compare. Never tell the user "no shop sells this" on the strength of a category-filtered search.
 
-**`get_offers` comes back empty.** Empty means no other listing was matched to this product. It does not mean only one shop sells it. Do this before you answer a "cheapest" question:
+**`get_offers` comes back empty.** Empty means no other listing of this product can be shown: there is no match, the match is too uncertain to show, or the other listings are not available now. The answer's `reason` field says `no_other_listing` or `no_other_linkable_listing`. Neither means only one shop sells it. Do this before you answer a "cheapest" question:
 
 1. Call `search_products` with the product's name (and brand, in `query`) and a price band of roughly 20% either side of its price.
 2. Pick the hits that are the same model and variant. Check storage size, colour and size in the names; shops write these differently and some leave them out.
 3. Call `get_products` with those ids to get delivery facts and price freshness for all of them in one call.
 4. Say that you matched them by name yourself, so the user knows to check the variant at the shop.
 
-**A 30-day low far below the current price.** `lowest_30d` much lower than the price can be a sale that ended or bad data. Call `get_price_history` before you call anything a deal. Each point holds from its time until the next point.
+**A 30-day low far below the current price.** `lowest_30d` much lower than the price can be a sale that ended or bad data. Call `get_price_history` before you call anything a deal. Its `points` are the price a shopper paid at each change, and each point holds from its time until the next. Its `sale_spans` list the periods when the shop's list price was above the price charged: `from`, `to` (absent while the sale is still on), `list_price` and `sale_price`.
 
 Two smaller ones: `brand` is the shop's own value and can be missing or hold the shop's name, so when the `brands` filter returns little, put the brand in `query`. And `image_url` is the shop's own file, which may refuse to load or be in a format your client cannot show; do not promise a picture.
 

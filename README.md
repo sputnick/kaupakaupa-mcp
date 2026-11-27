@@ -48,7 +48,7 @@ Then ask something:
 | `get_product` | One product: price, discount, delivery facts, when the price was checked, description, category trail |
 | `get_products` | Up to 10 products at once, to compare candidates |
 | `get_offers` | The shops whose listings were matched as the same product, cheapest first |
-| `get_price_history` | How one product's price moved over 30 days, 90 days or all time |
+| `get_price_history` | How one product's price moved over 30 days, 90 days or all time, with its sale periods |
 | `browse_categories` | The category tree, one level at a time |
 | `get_shop` | A shop's profile by domain, or shops by name |
 | `list_markets` | The markets served, with currency and default language |
